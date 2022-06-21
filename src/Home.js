@@ -11,12 +11,14 @@ export default function Home() {
       name: x,
       count: d?.filter((y) => y.tags === x)?.length || 0,
     }));
+    return temp2 || [];
   };
-  const loadPrdocust = () => {
+  const boot = () => {
     axios
       .get(`${url}/products.json`)
+      .then((d) => d.data)
       .then((d) => {
-        let temp = {};
+        let temp = [];
         let x = Object.keys(d);
         let y = Object.values(d);
         for (let i = 0; i < x.length; i++) {
@@ -27,9 +29,11 @@ export default function Home() {
       .then((d) => {
         seta(d);
         setb(getCAts(d));
-      });
+        console.log(getCAts(d));
+      })
+      .catch((e) => console.log('err', e));
   };
-  useEffect(loadPrdocust, []);
+  useEffect(boot, []);
 
   return (
     <div>
@@ -49,13 +53,13 @@ export default function Home() {
   );
 }
 
-function Products({ id, title, price, image, tags }) {
+function Product({ id, title, price, image, tags }) {
   return (
     <div>
       <img width="50" height="50" src={image} />
-      <div>{x.id}</div>
-      <div>{x.title}</div>
-      <div>{x.price}</div>
+      <div>{id}</div>
+      <div>{title}</div>
+      <div>{price}</div>
     </div>
   );
 }

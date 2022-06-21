@@ -6,6 +6,7 @@ export default function Home() {
     title: '',
     price: 0,
     image: null,
+    tags: '',
   }); //products
   const handlefile = (e) => {
     let file = e.target.files[0];
@@ -29,6 +30,12 @@ export default function Home() {
         value={ob.title}
         onChange={(e) => setob({ ...ob, title: e.target.value })}
       />
+      <input
+        placeholder="tags"
+        value={ob.tags}
+        onChange={(e) => setob({ ...ob, tags: e.target.value })}
+      />
+
       <input
         placeholder="price"
         value={ob.price}
